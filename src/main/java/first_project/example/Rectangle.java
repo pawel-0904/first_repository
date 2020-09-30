@@ -5,6 +5,9 @@ public class Rectangle implements Figure {
     private double w;
 
     public Rectangle(double l, double w) {
+        if (l < 0 || w < 0) {
+            throw new IllegalArgumentException("Параметры фигуры не могут отрицатльными!");
+        }
         this.l = l;
         this.w = w;
     }
