@@ -4,6 +4,7 @@ import HomeTask.annotations.After;
 import HomeTask.annotations.Before;
 import HomeTask.annotations.Test;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,30 +25,10 @@ public class MyFramework {
         //Method setNameMethod = clazz.getDeclaredMethod("setName", String.class);
         Field fieldName = clazz.getDeclaredField("name"); //понятно, что если в передваемом классе не будет поля name, то упадем с ошибкой, но для примера сойдет)
 
-        List<Method> testMethods = new ArrayList<>();
-        List<Method> beforeMethods = new ArrayList<>();
-        List<Method> afterMethods = new ArrayList<>();
-
-        //фильтруем методы с аннотацией Test
-        for (Method method : clazz.getDeclaredMethods()){
-            if (method.isAnnotationPresent(Test.class)){
-                testMethods.add(method);
-            }
-        }
-
-        //фильтруем методы с аннотацией Before
-        for (Method method : clazz.getDeclaredMethods()){
-            if (method.isAnnotationPresent(Before.class)){
-                beforeMethods.add(method);
-            }
-        }
-
-        //фильтруем методы с аннотацией After
-        for (Method method : clazz.getDeclaredMethods()){
-            if (method.isAnnotationPresent(After.class)){
-                afterMethods.add(method);
-            }
-        }
+        //соберем методы отмеченные аннотациями
+        List<Method> beforeMethods = getMethodAnnotation(clazz, Before.class);
+        List<Method> testMethods = getMethodAnnotation(clazz, Test.class);
+        List<Method> afterMethods = getMethodAnnotation(clazz, After.class);
 
         for (Method tempMethod : testMethods) {
             try {
@@ -85,6 +66,17 @@ public class MyFramework {
         System.out.println("Всего тестов:" + countTest);
         System.out.println("Успешных тестов:" + successTest);
         System.out.println("Тесты упали с ошибкой:" + errorTest);
+    }
 
+    private static List<Method> getMethodAnnotation(Class<?> clazz, Class<? extends Annotation> annotation) {
+
+        List<Method> methods = new ArrayList<>();
+
+        for (Method method : clazz.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(annotation)) {
+                methods.add(method);
+            }
+        }
+        return methods;
     }
 }
