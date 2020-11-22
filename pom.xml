@@ -13,6 +13,7 @@
       <module>l06_01</module>
       <module>Lesson_Annotation</module>
       <module>MyFramework</module>
+      <module>l06-sample</module>
     </modules>
 
     <name>first_project</name>
@@ -36,6 +37,11 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
+      <version>5.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
       <version>5.3.2</version>
     </dependency>
   </dependencies>
