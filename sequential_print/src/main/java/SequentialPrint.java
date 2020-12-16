@@ -5,7 +5,7 @@ public class SequentialPrint {
     private static final Logger logger = LoggerFactory.getLogger(SequentialPrint.class);
     private String last = "second";
 
-    private synchronized void action(String message) {
+    private void action(String message) {
 
         int j = 0;
         while (true) {
@@ -25,7 +25,7 @@ public class SequentialPrint {
         }
     }
 
-    private void superAction(String message, int j) throws InterruptedException {
+    private synchronized void superAction(String message, int j) throws InterruptedException {
         while (last.equals(message)) {
             wait();
         }
