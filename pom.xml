@@ -10,9 +10,12 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
       <module>first_child</module>
+      <module>Students</module>
+      <!-- <module>l06_01</module> -->
       <module>Lesson_Annotation</module>
       <module>MyFramework</module>
       <module>l06-sample</module>
+      <module>sequential_print</module>
     </modules>
 
     <name>first_project</name>
@@ -32,6 +35,21 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -88,14 +106,14 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
-        <plugin>
+        <!--<plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
             <source>8</source>
             <target>8</target>
           </configuration>
-        </plugin>
+        </plugin> -->
       </plugins>
     </pluginManagement>
   </build>
