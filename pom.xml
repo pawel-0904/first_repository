@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
       <module>first_child</module>
+      <module>Students</module>
       <!-- <module>l06_01</module> -->
       <module>Lesson_Annotation</module>
       <module>MyFramework</module>
