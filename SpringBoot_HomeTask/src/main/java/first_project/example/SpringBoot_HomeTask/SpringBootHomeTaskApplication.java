@@ -51,10 +51,10 @@ public class SpringBootHomeTaskApplication {
 		Comment comment1 = new Comment("Супер");
 		Comment comment2 = new Comment("Такое себе");
 
-		List<Comment> comments = new ArrayList<Comment>();
-		//comments.add(comment1);
-		//comments.add(comment2);
-		repository.save(new Book("The Cruel Age", genreFiction));
+		List<Comment> comments = new ArrayList<>();
+		comments.add(comment1);
+		comments.add(comment2);
+		repository.save(new Book("The Cruel Age", genreFiction, comments));
 
 		//Если раскоментить эту строчку, то будет ошибка - так и не понял почему.
 		//Почему-то не могу сделать две разных книги с одним жанром

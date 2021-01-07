@@ -23,4 +23,6 @@ public class Comment {
     public Comment(String text) {
         this.comment = text;
     }
+    public Comment( ) {
+    }
 }
