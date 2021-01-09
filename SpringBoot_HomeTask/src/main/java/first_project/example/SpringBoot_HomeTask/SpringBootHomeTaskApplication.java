@@ -1,14 +1,10 @@
 package first_project.example.SpringBoot_HomeTask;
 
-import first_project.example.SpringBoot_HomeTask.dao.BooksDao;
-import first_project.example.SpringBoot_HomeTask.dao.BooksDaoSimple;
 import first_project.example.SpringBoot_HomeTask.domain.Book;
 import first_project.example.SpringBoot_HomeTask.domain.Comment;
 import first_project.example.SpringBoot_HomeTask.domain.Genre;
 import first_project.example.SpringBoot_HomeTask.repostory.BookRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.GenreRepository;
-import first_project.example.SpringBoot_HomeTask.service.BooksService;
-import first_project.example.SpringBoot_HomeTask.service.BooksServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -59,6 +55,7 @@ public class SpringBootHomeTaskApplication {
 		//Если раскоментить эту строчку, то будет ошибка - так и не понял почему.
 		//Почему-то не могу сделать две разных книги с одним жанром
 		//repository.save(new Book("Flowers for Algernon", genreFiction));
+
 		repository.save(new Book("FlowersForAlgernon", new Genre("TrueStory")));
 
 

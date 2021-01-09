@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Data
@@ -30,7 +31,16 @@ public class Genre {
     public Genre(){
     }
 
+    public Genre(long id,String genreName){
+        this.id = id;
+        this.genreName = genreName;
+    }
+
+    @OneToMany (mappedBy="genre", fetch=FetchType.EAGER)
+    private List<Book> books;
+
     public String getName() {
         return genreName;
     }
 }
+

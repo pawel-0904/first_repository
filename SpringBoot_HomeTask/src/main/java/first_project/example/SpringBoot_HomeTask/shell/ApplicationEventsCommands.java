@@ -4,13 +4,11 @@ import first_project.example.SpringBoot_HomeTask.domain.Book;
 import first_project.example.SpringBoot_HomeTask.domain.Genre;
 import first_project.example.SpringBoot_HomeTask.repostory.BookRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.GenreRepository;
-import first_project.example.SpringBoot_HomeTask.service.BooksServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import first_project.example.SpringBoot_HomeTask.dao.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ApplicationEventsCommands {
 
-    private BooksDaoSimple booksDaoSimple = new BooksDaoSimple();
-
-    private BooksServiceImpl booksService = new BooksServiceImpl(booksDaoSimple);
 
     private String userName;
 
@@ -40,16 +35,14 @@ public class ApplicationEventsCommands {
 
     @ShellMethod(value = "Add Book", key = {"a", "add", "add Book"})
     public void addNewBook(@ShellOption(defaultValue = "The Cruel Age") String bookName) {
-        //booksService.addBookService(bookName);
-       // booksService.save(new Book(bookName));
+        //Genre newGenre = new Genre("NewGenre");
         repository.save(new Book(bookName));
 
     }
 
     //Получить все книги
     @ShellMethod(value = "Get All Books", key = {"g", "get", "get All"})
-    public String getAllBooks() {
-        //Вывод ужасный, пока скорее как заглушка
+    public void getAllBooks() {
 
         List<Book> allBooks = repository.findAll();
 
@@ -57,8 +50,6 @@ public class ApplicationEventsCommands {
         {
             System.out.println("Книга: " + row.getName() + "; Жанр:" + row.getGenre().getGenreName());
         }
-
-        return "Books " + booksService.getAllBooksService().listBooks;
     }
 
     //Поиск книги по имени
@@ -79,10 +70,22 @@ public class ApplicationEventsCommands {
         Optional<Genre> genre = genreRepository.findByGenreName(genreName);
 
         //Потом книгу по этому жанру
-        //Так и не понял, почему я не могу искать по новому объекту (new Genre("TrueStory"))
         Book book = repository.findByGenre(genre);
 
         System.out.println("      " + book.getName());
+
+    }
+
+    //Поиск книги по названию с помощью like
+    @ShellMethod(value = "Find By Like", key = {"fl", "find by like"})
+    public void findByLike(String name) {
+
+        List<Book> allBooks = repository.findByNameLike(name);
+
+        for (Book row : allBooks)
+        {
+            System.out.println("Книга: " + row.getName() + "; Жанр:" + row.getGenre().getGenreName());
+        }
 
     }
 
