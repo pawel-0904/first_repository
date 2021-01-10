@@ -9,6 +9,4 @@ public interface CommentRepository extends CrudRepository<Comment, Integer> {
 
     //Genre findByName(String s);
 
-    //Optional<Genre> findByName(String name);
-
 }

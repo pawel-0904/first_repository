@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "comment")
@@ -24,5 +24,8 @@ public class Comment {
         this.comment = text;
     }
     public Comment( ) {
+    }
+    public String getComment() {
+        return comment;
     }
 }

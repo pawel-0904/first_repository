@@ -1,6 +1,6 @@
 package first_project.example.SpringBoot_HomeTask.repostory;
 
-import com.sun.tools.javah.Gen;
+import first_project.example.SpringBoot_HomeTask.domain.Author;
 import first_project.example.SpringBoot_HomeTask.domain.Genre;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,10 +19,12 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
 
     Book findByName(String name);
 
-    Book findByGenre(Optional<Genre> genre);
+    List<Book> findByGenre(Optional<Genre> genre);
 
     @Query("SELECT b FROM Book b WHERE b.name LIKE CONCAT('%',:name,'%')")
     List<Book> findByNameLike(@Param("name") String name);
+
+    List<Book> findByAuthor(Optional<Author> author);
 
     //Book findByGenreName(String );
 

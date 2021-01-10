@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "genre")
@@ -18,7 +18,7 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "genreName", nullable = false, unique = true)
+    @Column(name = "genre_Name", nullable = false, unique = true)
     private String genreName;
 
     public String getGenreName() {
@@ -31,13 +31,13 @@ public class Genre {
     public Genre(){
     }
 
-    public Genre(long id,String genreName){
+    /*public Genre(long id,String genreName){
         this.id = id;
         this.genreName = genreName;
-    }
+    }*/
 
-    @OneToMany (mappedBy="genre", fetch=FetchType.EAGER)
-    private List<Book> books;
+    /*@OneToMany (mappedBy="genre", fetch=FetchType.EAGER)
+    private List<Book> books;*/
 
     public String getName() {
         return genreName;
