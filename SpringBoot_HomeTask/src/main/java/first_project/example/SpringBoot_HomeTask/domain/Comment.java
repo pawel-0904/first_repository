@@ -20,8 +20,8 @@ public class Comment {
     @Column(name = "comment", nullable = false, unique = true)
     private String comment;
 
-    // Пусть книги будут одножанровыми
-    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER) // после того как ставлю здесь merge,
+    // У одной книги несколько комментариев
+    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     // Задает поле, по которому происходит объединение с таблицей для хранения связанной сущности
     @JoinColumn(name = "book_id")
     private Book book;
