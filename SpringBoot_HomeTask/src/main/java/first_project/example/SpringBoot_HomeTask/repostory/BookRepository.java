@@ -19,15 +19,8 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
 
     Book findByName(String name);
 
-    List<Book> findByGenre(Optional<Genre> genre);
-
     @Query("SELECT b FROM Book b WHERE b.name LIKE CONCAT('%',:name,'%')")
     List<Book> findByNameLike(@Param("name") String name);
 
-    List<Book> findByAuthor(Optional<Author> author);
-
-    //Book findByGenreName(String );
-
-    //Book findByGenreName(String genreName);
 
 }

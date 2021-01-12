@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "genre")
@@ -21,26 +21,14 @@ public class Genre {
     @Column(name = "genre_Name", nullable = false, unique = true)
     private String genreName;
 
-    public String getGenreName() {
-        return genreName;
-    }
+    // Один и тот же жанр у нескольких книг
+    @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id")
+    private List<Book> books;
 
     public Genre(String genreName){
         this.genreName = genreName;
     }
-    public Genre(){
-    }
 
-    /*public Genre(long id,String genreName){
-        this.id = id;
-        this.genreName = genreName;
-    }*/
-
-    /*@OneToMany (mappedBy="genre", fetch=FetchType.EAGER)
-    private List<Book> books;*/
-
-    public String getName() {
-        return genreName;
-    }
 }
 

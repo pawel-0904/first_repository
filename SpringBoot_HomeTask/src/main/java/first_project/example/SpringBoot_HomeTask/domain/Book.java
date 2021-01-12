@@ -1,16 +1,15 @@
 package first_project.example.SpringBoot_HomeTask.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Entity // Указывает, что данный класс является сущностью
 @Table(name = "book") // Задает имя таблицы, на которую будет отображаться сущность
 public class Book {
@@ -18,6 +17,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Стратегия генерации идентификаторов
     private long id;
 
+    @NonNull
     // Задает имя и некоторые свойства поля таблицы, на которое будет отображаться поле сущности
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -30,7 +30,7 @@ public class Book {
     private Genre genre;
 
     // У одной книги может быть несколько комментов
-    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private List<Comment> comments;
 
@@ -40,18 +40,6 @@ public class Book {
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> author;
-
-    /*public Book(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }*/
-
-    public Book() {
-    }
-
-    public Book(String name) {
-        this.name = name;
-    }
 
     public Book(String name, Genre genre) {
         this.name = name;
@@ -64,25 +52,4 @@ public class Book {
         this.comments = comments;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public List<Author> getAuthors() {
-        return author;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    /*public void getAllAuthors() {
-        for(Author a : author){
-            System.out.println("Fio: " + a.getFio());
-        }
-    }*/
 }

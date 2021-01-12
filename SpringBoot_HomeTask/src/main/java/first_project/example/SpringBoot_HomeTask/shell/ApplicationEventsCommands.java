@@ -8,14 +8,17 @@ import first_project.example.SpringBoot_HomeTask.repostory.AuthorRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.BookRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.GenreRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @ShellComponent
 @RequiredArgsConstructor
 public class ApplicationEventsCommands {
@@ -37,11 +40,9 @@ public class ApplicationEventsCommands {
         return String.format("Добро пожаловать: %s", userName);
     }
     //Добавить книгу
-    //Поптом надо этод метод доделать -> при добавлении книг через интерфейс
+    //Потом надо этод метод доделать -> при добавлении книг через интерфейс
     @ShellMethod(value = "Add Book", key = {"a", "add", "add Book"})
     public void addNewBook(@ShellOption(defaultValue = "The Cruel Age") String bookName) {
-        //Genre newGenre = new Genre("NewGenre");
-        //genreRepository.save(newGenre);
         repository.save(new Book(bookName));
     }
 
@@ -65,7 +66,7 @@ public class ApplicationEventsCommands {
 
         for (Genre row : allGenres)
         {
-            System.out.println("Жанр: " + row.getName());
+            System.out.println("Жанр: " + row.getGenreName());
         }
 
     }
@@ -90,11 +91,10 @@ public class ApplicationEventsCommands {
         if (genre.isPresent()) {
 
             //Потом книгу по этому жанру
-            List<Book> allBooks = repository.findByGenre(genre);
+            List<Book> allBooks = genre.get().getBooks();
             count = allBooks.size();
 
             for (Book row : allBooks) {
-                //System.out.println("Книга: " + row.getName());
                 System.out.println("Книга: " + row.getName() + "; Жанр:" + row.getGenre().getGenreName());
             }
         }
@@ -106,15 +106,16 @@ public class ApplicationEventsCommands {
 
     //Поиск книги по автору
     @ShellMethod(value = "Find By Author", key = {"fa", "find by author"})
-    public void findByAuthor(String authorName) {
-
+    public int findByAuthor(String authorName) {
+        int count = 0;
         //Сначала найдем автора
         Optional<Author> author = authorRepository.findByFio(authorName);
+
         if (author.isPresent()) {
             //Потом книгу по этому автору
-            List<Book> allBooks = repository.findByAuthor(author);
+            List<Book> allBooks = author.get().getBooks();
+            count = allBooks.size();
 
-            //System.out.println("      " + author.getName());
             for (Book row : allBooks) {
                 //Соберем все комменты по книге
                 List<Comment> comments = row.getComments();
@@ -122,23 +123,22 @@ public class ApplicationEventsCommands {
                 for (Comment c : comments) {
                     allCommentsOfBook = allCommentsOfBook + c.getComment() + ", ";
                 }
-                //с авторами пока так не получаетсяя
-                //List<Author> authors = row.getAuthors();
-                //System.out.println("  кол-во авторов;    " + row.getAuthors().size());
-            /*String allAuthorsOfBook = "";
-            for (Author a : authors) {
-                allAuthorsOfBook = allAuthorsOfBook + a.getFio() + ";";
-            }*/
+                //Соберем авторов книги
+                List<Author> authors = row.getAuthor();
+                String allAuthorsOfBook = "";
+                 for (Author a : authors) {
+                     allAuthorsOfBook = allAuthorsOfBook + a.getFio() + ";";
+                }
 
                 //надо сделать отдельный метод для вывода
-                System.out.println("Книга: " + row.getName() + "; Жанр: " + row.getGenre().getGenreName() + "; Комментарии: " + allCommentsOfBook);
+                System.out.println("Книга: " + row.getName() + "; Авторы: " + allAuthorsOfBook+ " Жанр: " + row.getGenre().getGenreName() + "; Комментарии: " + allCommentsOfBook);
                 //System.out.println("Книга: " + row.getName() + "; Авторы:" + authoursOfBook + " Жанр:" + row.getGenre().getGenreName());
             }
         }
         else {
             System.out.println("Автор не найден!");
         }
-
+        return count;
     }
 
     //Поиск книги по названию с помощью like
@@ -155,7 +155,7 @@ public class ApplicationEventsCommands {
         return allBooks.size();
     }
 
-    /*private Availability isPublishEventCommandAvailable() {
-        return userName == null? Availability.unavailable("Сначала залогиньтесь"): Availability.available();
-    }*/
+     /*private Availability isPublishEventCommandAvailable() {
+         return userName == null? Availability.unavailable("Сначала залогиньтесь"): Availability.available();
+     }*/
 }

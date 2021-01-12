@@ -26,16 +26,6 @@ public class SpringBootHomeTaskApplication {
 		SpringApplication.run(SpringBootHomeTaskApplication.class, args);
 		//Console.main(args);
 	}
-	//Заккоментил, так как повесил аннотацию на BooksDaoSimple
-	/*@Bean
-	public BooksDao booksDao(){
-		return new BooksDaoSimple();
-	}*/
-
-	/*@Bean
-	public BooksService booksService(BooksDao booksDao) {
-		return new BooksServiceImpl(booksDao);
-	}*/
 
 	@Autowired
 	private BookRepository repository;
@@ -48,27 +38,22 @@ public class SpringBootHomeTaskApplication {
 		Genre genreFiction = new Genre("NonFiction");
 		genreRepository.save(genreFiction);
 		//genreRepository.save(new Genre("Fiction"));
-		Comment comment1 = new Comment("Супер");
+		/*Comment comment1 = new Comment("Супер");
 		Comment comment2 = new Comment("Такое себе");
 
 		List<Comment> comments = new ArrayList<>();
 		comments.add(comment1);
-		comments.add(comment2);
+		comments.add(comment2);*/
 		//repository.save(new Book("The Cruel Age", genreFiction, comments));
 
 		//repository.save(new Book("The Cruel Age", genreFiction));
 		//repository.save(new Book("The Cruel Age 2", new Genre("Fiction")));
 		repository.save(new Book("The New Book", genreFiction));
 
-		//Если раскоментить эту строчку, то будет ошибка - так и не понял почему.
-		//Почему-то не могу сделать две разных книги с одним жанром
 		//repository.save(new Book("Flowers for Algernon", genreFiction));
 
 		//repository.save(new Book("FlowersForAlgernon", new Genre("TrueStory")));
 
-
-		//Book book = repository.findByName("The Cruel Age");
-		//System.out.println("-------------//---------//--------//-----" + book.getName());
 
 
 

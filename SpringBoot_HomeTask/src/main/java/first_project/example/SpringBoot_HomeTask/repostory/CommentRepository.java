@@ -7,6 +7,6 @@ public interface CommentRepository extends CrudRepository<Comment, Integer> {
 
    Iterable<Comment> findAll();
 
-    //Genre findByName(String s);
+    Comment findByComment(String s);
 
 }

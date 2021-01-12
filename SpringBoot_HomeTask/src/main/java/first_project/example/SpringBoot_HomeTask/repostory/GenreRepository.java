@@ -10,8 +10,6 @@ public interface GenreRepository extends CrudRepository<Genre, Integer> {
 
    List<Genre> findAll();
 
-   //Genre findByName(String s);
-
    Optional<Genre> findByGenreName(String name);
 
 }

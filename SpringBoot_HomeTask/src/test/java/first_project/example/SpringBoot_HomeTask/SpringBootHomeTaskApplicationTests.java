@@ -55,6 +55,13 @@ class SpringBootHomeTaskApplicationTests {
 		Assert.assertEquals(6, applicationEventsCommands.getAllBooks());
 
 	}
+	@DisplayName("Должен вернуть кол-во всех книг - ищем по автору")
+	@Test
+	void shouldFindBookByAuthor() {
+
+		Assert.assertEquals(1, applicationEventsCommands.findByAuthor("Kalashnikov_I"));
+
+	}
 
 
 }
