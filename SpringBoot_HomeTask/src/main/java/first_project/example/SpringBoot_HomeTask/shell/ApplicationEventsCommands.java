@@ -49,7 +49,7 @@ public class ApplicationEventsCommands {
     //Получить все книги
     @ShellMethod(value = "Get All Books", key = {"g", "get", "get All"})
     public int getAllBooks() {
-        List<Book> allBooks = repository.findAll();
+        List<Book> allBooks = (List<Book>) repository.findAll();
 
         for (Book row : allBooks)
         {
@@ -62,7 +62,7 @@ public class ApplicationEventsCommands {
     @ShellMethod(value = "Get All Genres", key = {"gg", "getGenres"})
     public void getAllGenres() {
 
-        List<Genre> allGenres = genreRepository.findAll();
+        List<Genre> allGenres = (List<Genre>) genreRepository.findAll();
 
         for (Genre row : allGenres)
         {
@@ -78,6 +78,40 @@ public class ApplicationEventsCommands {
         Book book = repository.findByName(bookName);
         System.out.println("Книга: " + book.getName());
         return book.getName();
+
+    }
+
+    //Поиск книги по имени
+    @ShellMethod(value = "Find Book By Id", key = {"fi", "find id", "find book by id"})
+    public String findBookById(int id) {
+
+        Optional<Book> book = repository.findById(id);
+        System.out.println("Книга: " + book.get().getName());
+        return book.get().getName();
+
+    }
+
+    //Изменение книги по id
+    @ShellMethod(value = "Change Book By Id", key = {"ci", "change by id", "change book by id"})
+    public String changeBookById(int id) {
+
+        Optional<Book> book = repository.findById(id);
+        book.get().setName("madeNewName");
+        repository.save(book.get());
+        System.out.println("Книга: " + book.get().getName());
+        return book.get().getName();
+
+    }
+
+    //Изменение жанра книги по id
+    @ShellMethod(value = "Change GenreBook By Id", key = {"cg", "change genre", "change genreBook by id"})
+    public String changeGenreBookById(int id) {
+
+        Optional<Book> book = repository.findById(id);
+        book.get().getGenre().setGenreName("madeNewGenreName");
+        repository.save(book.get());
+        System.out.println("Книга: " + book.get().getGenre().getGenreName());
+        return book.get().getGenre().getGenreName();
 
     }
 
@@ -110,6 +144,8 @@ public class ApplicationEventsCommands {
         int count = 0;
         //Сначала найдем автора
         Optional<Author> author = authorRepository.findByFio(authorName);
+
+
 
         if (author.isPresent()) {
             //Потом книгу по этому автору

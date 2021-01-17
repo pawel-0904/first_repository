@@ -24,7 +24,7 @@ public class SpringBootHomeTaskApplication {
 
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(SpringBootHomeTaskApplication.class, args);
-		//Console.main(args);
+		Console.main(args);
 	}
 
 	@Autowired
@@ -35,8 +35,8 @@ public class SpringBootHomeTaskApplication {
 
 	@PostConstruct
 	public void init() {
-		Genre genreFiction = new Genre("NonFiction");
-		genreRepository.save(genreFiction);
+		//Genre genreFiction = new Genre("NonFiction");
+		//genreRepository.save(genreFiction);
 		//genreRepository.save(new Genre("Fiction"));
 		/*Comment comment1 = new Comment("Супер");
 		Comment comment2 = new Comment("Такое себе");
@@ -48,7 +48,7 @@ public class SpringBootHomeTaskApplication {
 
 		//repository.save(new Book("The Cruel Age", genreFiction));
 		//repository.save(new Book("The Cruel Age 2", new Genre("Fiction")));
-		repository.save(new Book("The New Book", genreFiction));
+		//repository.save(new Book("The New Book", genreFiction));
 
 		//repository.save(new Book("Flowers for Algernon", genreFiction));
 

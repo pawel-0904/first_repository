@@ -15,7 +15,7 @@ import java.util.List;
 public class Book {
     @Id // Позволяет указать какое поле является идентификатором
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Стратегия генерации идентификаторов
-    private long id;
+    private int id;
 
     @NonNull
     // Задает имя и некоторые свойства поля таблицы, на которое будет отображаться поле сущности

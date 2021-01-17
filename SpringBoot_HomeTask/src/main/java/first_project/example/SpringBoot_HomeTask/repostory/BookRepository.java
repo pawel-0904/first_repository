@@ -15,7 +15,7 @@ import java.util.Optional;
 //@Component
 public interface BookRepository extends CrudRepository<Book, Integer> {
 
-    List<Book> findAll();
+    //List<Book> findAll();
 
     Book findByName(String name);
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface AuthorRepository extends CrudRepository<Author, Integer> {
 
-    List<Author> findAll();
+    //List<Author> findAll();
 
     Optional<Author> findByFio(String fio);
 
