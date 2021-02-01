@@ -8,7 +8,6 @@ import first_project.example.SpringBoot_HomeTask.repostory.AuthorRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.BookRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.GenreRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

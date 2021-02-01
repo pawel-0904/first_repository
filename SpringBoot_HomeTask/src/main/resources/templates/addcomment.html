@@ -9,7 +9,6 @@
 <form id="edit-form" th:action="@{/comment/add(id=${book.id})}" th:object="${book}" th:method="post" action="addcomment.html">
 
     <h1>New comment:</h1>
-
     <div class="row">
         <label for="id-input">ID:</label>
         <input id="id-input" type="text" readonly="readonly" th:value="${book.id}" value="1"/>

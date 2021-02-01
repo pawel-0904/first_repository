@@ -2,7 +2,6 @@ package first_project.example.SpringBoot_HomeTask.rest;
 
 import first_project.example.SpringBoot_HomeTask.domain.Author;
 import first_project.example.SpringBoot_HomeTask.domain.Book;
-import first_project.example.SpringBoot_HomeTask.domain.Comment;
 import first_project.example.SpringBoot_HomeTask.domain.Genre;
 import first_project.example.SpringBoot_HomeTask.repostory.AuthorRepository;
 import first_project.example.SpringBoot_HomeTask.repostory.BookRepository;

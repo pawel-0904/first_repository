@@ -17,7 +17,7 @@ public class SpringBootHomeTaskApplication {
 
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(SpringBootHomeTaskApplication.class, args);
-		//Console.main(args);
+		////Console.main(args);
 	}
 
 	@Autowired
