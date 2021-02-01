@@ -8,7 +8,7 @@ insert into comment(comment, book_id)
 values ('Супер', 1), ('Такое себе', 1), ('Норм', 2), ('Сойдет', 2), ('comment', 3);
 
 insert into author(fio)
-values ('Kalashnikov_I'), ('Kiz_D');
+values ('Kalashnikov_I'), ('Kiz_D'), ('author_03'), ('author_04'), ('author_05');
 
 insert into book_author(book_id, author_id)
-values (1, 1),   (2, 2);
+values (1, 1),   (2, 2),   (3, 3),   (4, 4),   (5, 5);

@@ -3,11 +3,42 @@
 <head>
     <meta charset="UTF-8"/>
     <title>List of all books</title>
-<!--    <link rel="stylesheet" type="text/css" href="style.css" />-->
-    <link th:href="@{/templates/style.css}" rel="stylesheet" />
+
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Books:</h1>
+<h1>Library:</h1>
+
+
+<div class="filters">
+    <div class="table-title">Filters:</div>
+    <div>
+        <table>
+            <form id="edit-form" th:action="@{/filter}" th:method="get">
+                <td>
+                    <div class="row">
+                        <label for="holder-input">Genre:</label>
+                        <select id="holder-input" name="genre" >
+                            <option th:each="genre : ${filter_genres}" th:value="${genre.id}" th:utext="${genre.genreName}"/>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="row">
+                        <button class="save" type="submit">Filter</button>
+                    </div>
+                </td>
+            </form>
+            <td>
+                <form id="clear-form" th:action="@{/}" th:method="get">
+                    <div class="row">
+                        <button class="save" type="submit">Clear</button>
+                    </div>
+                </form>
+            </td>
+        </table>
+    </div>
+</div>
 
 <table class="books">
     <thead>
@@ -24,7 +55,8 @@
     <tr th:each="book : ${books}">
         <td th:text="${book.id}">1</td>
         <td th:text="${book.name}">John Doe</td>
-        <td th:text="${book.genre.genreName}"></td>
+        <td th:text="${book.genre != null ? book.genre.genreName : 'NOT FOUND'}"/>
+
 <!--        <td>Genre</td>-->
 
         <td>
@@ -43,6 +75,14 @@
         </td>
         <td>
             <a th:href="@{/edit(id=${book.id})}" href="edit.html">Edit</a>
+        </td>
+        <td>
+            <form th:action="@{/delete(id=${book.id})}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td>
+            <a th:href="@{/comment/add(id=${book.id})}" href="comment/add.html">AddComment</a>
         </td>
     </tr>
     </tbody>
