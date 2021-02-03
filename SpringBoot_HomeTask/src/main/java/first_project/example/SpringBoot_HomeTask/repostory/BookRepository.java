@@ -15,9 +15,10 @@ import java.util.Optional;
 //@Component
 public interface BookRepository extends CrudRepository<Book, Integer> {
 
-    List<Book> findAll();
 
     Book findByName(String name);
+
+    Book findByGenre(Genre genre);
 
     @Query("SELECT b FROM Book b WHERE b.name LIKE CONCAT('%',:name,'%')")
     List<Book> findByNameLike(@Param("name") String name);

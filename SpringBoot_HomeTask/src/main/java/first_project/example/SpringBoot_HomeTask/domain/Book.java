@@ -6,7 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -15,7 +17,7 @@ import java.util.List;
 public class Book {
     @Id // Позволяет указать какое поле является идентификатором
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Стратегия генерации идентификаторов
-    private long id;
+    private int id;
 
     @NonNull
     // Задает имя и некоторые свойства поля таблицы, на которое будет отображаться поле сущности
@@ -23,7 +25,7 @@ public class Book {
     private String name;
 
     // Пусть книги будут одножанровыми
-    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.MERGE) // после того как ставлю здесь merge,
+    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL) // после того как ставлю здесь merge,
     //имя книги может быть не уникальным, поэтому в схеме sql прописал constraint UC_Book UNIQUE (name)
     // Задает поле, по которому происходит объединение с таблицей для хранения связанной сущности
     @JoinColumn(name = "genre_id")
@@ -50,6 +52,10 @@ public class Book {
         this.name = name;
         this.genre = genre;
         this.comments = comments;
+    }
+
+    public void addComment (String text){
+        this.comments.add(new Comment(text));
     }
 
 }
